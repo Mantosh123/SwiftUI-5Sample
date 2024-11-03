@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProspectView: View {
     
     enum FilterType {
         case none, contacted, uncontacted
     }
+    
+    @Environment(\.modelContext) var modelContext
+    @Query(sort: \Prospect.name) var prospacts: [Prospect]
     
     let filter: FilterType
     
@@ -28,8 +32,14 @@ struct ProspectView: View {
     
     var body: some View {
         NavigationStack {
-            Text("Hello")
+            Text("People:\(prospacts.count)")
                 .navigationTitle(title)
+                .toolbar {
+                    Button("Scan", systemImage: "qrcode.viewfinder") {
+                        let prospect = Prospect(name: "mantosh", emailAddress: "mantosh.123", isConnected: true)
+                        modelContext.insert(prospect)
+                    }
+                }
         }
     }
     
@@ -37,4 +47,5 @@ struct ProspectView: View {
 
 #Preview {
     ProspectView(filter: .none)
+        .modelContainer(for: Prospect.self)
 }

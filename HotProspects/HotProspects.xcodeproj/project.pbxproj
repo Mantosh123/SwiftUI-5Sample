@@ -13,6 +13,7 @@
 		B44678DC2CD7933F0067B8B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44678DB2CD7933F0067B8B6 /* Preview Assets.xcassets */; };
 		B44678E32CD793670067B8B6 /* ProspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44678E22CD793670067B8B6 /* ProspectView.swift */; };
 		B44678E52CD793790067B8B6 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44678E42CD793790067B8B6 /* MeView.swift */; };
+		B44678E72CD79FC20067B8B6 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44678E62CD79FC20067B8B6 /* Prospect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		B44678DB2CD7933F0067B8B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B44678E22CD793670067B8B6 /* ProspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectView.swift; sourceTree = "<group>"; };
 		B44678E42CD793790067B8B6 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
+		B44678E62CD79FC20067B8B6 /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				B44678D42CD7933E0067B8B6 /* HotProspectsApp.swift */,
 				B44678D62CD7933E0067B8B6 /* ContentView.swift */,
 				B44678E22CD793670067B8B6 /* ProspectView.swift */,
+				B44678E62CD79FC20067B8B6 /* Prospect.swift */,
 				B44678E42CD793790067B8B6 /* MeView.swift */,
 				B44678D82CD7933F0067B8B6 /* Assets.xcassets */,
 				B44678DA2CD7933F0067B8B6 /* Preview Content */,
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B44678E52CD793790067B8B6 /* MeView.swift in Sources */,
+				B44678E72CD79FC20067B8B6 /* Prospect.swift in Sources */,
 				B44678E32CD793670067B8B6 /* ProspectView.swift in Sources */,
 				B44678D72CD7933E0067B8B6 /* ContentView.swift in Sources */,
 				B44678D52CD7933E0067B8B6 /* HotProspectsApp.swift in Sources */,
