@@ -32,14 +32,34 @@ struct ProspectView: View {
     
     var body: some View {
         NavigationStack {
-            Text("People:\(prospacts.count)")
-                .navigationTitle(title)
+            List(prospacts) { prospact in
+                VStack(alignment: .leading, content: {
+                    Text(prospact.name)
+                        .font(.headline)
+                    Text(prospact.emailAddress)
+                        .font(.subheadline)
+                })
+                
+            }
+            .navigationTitle(title)
                 .toolbar {
                     Button("Scan", systemImage: "qrcode.viewfinder") {
-                        let prospect = Prospect(name: "mantosh", emailAddress: "mantosh.123", isConnected: true)
+                        let prospect = Prospect(name: "Mantosh", emailAddress: "mantosh123@gmail.com", isConnected: true)
                         modelContext.insert(prospect)
                     }
                 }
+        }
+    }
+    
+    init(filter: FilterType) {
+        self.filter = filter
+        
+        if filter != .none {
+            let showconected = filter == .contacted
+            
+            _prospacts = Query(filter: #Predicate{ $0.isConnected == showconected
+                
+            }, sort: [SortDescriptor(\Prospect.name)])
         }
     }
     
