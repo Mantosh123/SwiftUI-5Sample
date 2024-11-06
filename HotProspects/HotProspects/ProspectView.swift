@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CodeScanner
 
 struct ProspectView: View {
     
@@ -16,6 +17,8 @@ struct ProspectView: View {
     
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Prospect.name) var prospacts: [Prospect]
+    
+    @State private var isShowingScanner = false
     
     let filter: FilterType
     
@@ -42,12 +45,19 @@ struct ProspectView: View {
                 
             }
             .navigationTitle(title)
-                .toolbar {
-                    Button("Scan", systemImage: "qrcode.viewfinder") {
-                        let prospect = Prospect(name: "Mantosh", emailAddress: "mantosh123@gmail.com", isConnected: true)
-                        modelContext.insert(prospect)
-                    }
+            .toolbar {
+                Button("Scan", systemImage: "qrcode.viewfinder") {
+//                    let prospect = Prospect(name: "Mantosh", emailAddress: "mantosh123@gmail.com", isConnected: true)
+//                    modelContext.insert(prospect)
+                    isShowingScanner = true;
+                    
                 }
+            }
+            .sheet(isPresented: $isShowingScanner) {
+             
+                CodeScannerView(codeTypes:[.qr], simulatedData: "mantosh", completion: handleScan)
+                
+            }
         }
     }
     
@@ -63,6 +73,23 @@ struct ProspectView: View {
         }
     }
     
+    func handleScan(result: Result<ScanResult, ScanError>) {
+        isShowingScanner = false
+        
+        switch result {
+        case .success(let result):
+            let details = result.string.components(separatedBy: "\n")
+            guard details.count == 2 else { return }
+            
+            let person = Prospect(name: details[0], emailAddress: details[1], isConnected: true )
+            
+            modelContext.insert(person)
+            //modelContext.save()
+            
+        case.failure(let error):
+            print(error.localizedDescription)
+        }
+    }
 }
 
 #Preview {
