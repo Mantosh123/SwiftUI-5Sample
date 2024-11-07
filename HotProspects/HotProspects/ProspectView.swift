@@ -19,6 +19,7 @@ struct ProspectView: View {
     @Query(sort: \Prospect.name) var prospacts: [Prospect]
     
     @State private var isShowingScanner = false
+    @State private var selectedProspect = Set<Prospect>()
     
     let filter: FilterType
     
@@ -36,27 +37,51 @@ struct ProspectView: View {
     var body: some View {
         NavigationStack {
             List(prospacts) { prospact in
-                VStack(alignment: .leading, content: {
+                VStack(alignment: .leading) {
                     Text(prospact.name)
                         .font(.headline)
                     Text(prospact.emailAddress)
                         .font(.subheadline)
-                })
-                
+                }
+                .swipeActions {
+                    
+                    Button("Delete", systemImage: "trash", role: .destructive) {
+                        modelContext.delete(prospact)
+                    }
+                    
+                    if prospact.isConnected {
+                        Button("Mark Uncontacted", systemImage: "person.crop.circle.badge.xmark") {
+                            prospact.isConnected.toggle()
+                        }.tint(.blue)
+                    } else {
+                        Button("Mark Contacted", systemImage: "person.crop.circle.fill.badge.checkmark") {
+                            prospact.isConnected.toggle()
+                        }
+                        .tint(.green)
+                    }
+                }
+                .tag(prospact)
             }
             .navigationTitle(title)
             .toolbar {
-                Button("Scan", systemImage: "qrcode.viewfinder") {
-//                    let prospect = Prospect(name: "Mantosh", emailAddress: "mantosh123@gmail.com", isConnected: true)
-//                    modelContext.insert(prospect)
-                    isShowingScanner = true;
-                    
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Scan", systemImage: "qrcode.viewfinder") {
+                        isShowingScanner = true
+                    }
+                }
+
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+                
+                if selectedProspect.isEmpty == false {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button("Delete Selection", action:  delete)
+                    }
                 }
             }
             .sheet(isPresented: $isShowingScanner) {
-             
                 CodeScannerView(codeTypes:[.qr], simulatedData: "mantosh", completion: handleScan)
-                
             }
         }
     }
@@ -88,6 +113,12 @@ struct ProspectView: View {
             
         case.failure(let error):
             print(error.localizedDescription)
+        }
+    }
+    
+    func delete() {
+        for prospact in selectedProspect {
+            modelContext.delete(prospact)
         }
     }
 }

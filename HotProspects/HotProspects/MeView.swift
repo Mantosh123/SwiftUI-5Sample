@@ -45,8 +45,6 @@ struct MeView: View {
             }
         }
         return UIImage(systemName: "xmark.circle") ?? UIImage()
-        
-        
     }
 }
 
