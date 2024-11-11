@@ -12,5 +12,5 @@ struct Card {
     var prompt: String
     var answer: String
     
-    static let example = Card(prompt: "Who played the 13th Doctor in Who?", answer: "mantosh")
+    static let example = Card(prompt: "Who made this card game?", answer: "Mantosh")
 }
