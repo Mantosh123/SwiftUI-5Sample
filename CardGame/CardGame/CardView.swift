@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct CardView: View {
+ 
+    @State private var isShowingAnswer = false
+    @State private var offset = CGSize.zero
+    
     let card: Card
-    @State var isShowingAnswer = false
+    var removal: (() -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -31,13 +35,30 @@ struct CardView: View {
             .padding(20)
             .multilineTextAlignment(.center)
         }
-        .frame(width: 500, height: 200)
+        .frame(width: 450, height: 200)
+        .rotationEffect(.degrees(offset.width / 5.0))
+        .offset(x: offset.width * 5)
+        .opacity(2 - Double(abs(offset.width / 50)))
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    offset = gesture.translation
+                }
+                .onEnded{ _ in
+                    if abs(offset.width) > 100 {
+                        // remove
+                        removal?()
+                    } else {
+                        offset = .zero
+                    }
+            }
+        )
         .onTapGesture {
             isShowingAnswer.toggle()
         }
     }
 }
 
-#Preview {
-    CardView(card: Card.init(prompt: "test ", answer: "ok"), isShowingAnswer: true)
-}
+//#Preview {
+//    CardView(card: Card.init(prompt: "test ", answer: "ok"), isShowingAnswer: true)
+//}
