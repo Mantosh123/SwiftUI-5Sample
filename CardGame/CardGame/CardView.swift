@@ -19,6 +19,11 @@ struct CardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .fill(.white)
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(offset.width > 0 ? .green : .red)
+                    
+                )
                 .shadow(radius: 10)
             
             VStack {
