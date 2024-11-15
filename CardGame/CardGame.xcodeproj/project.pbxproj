@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B46CF1BC2CE738FE008CA0DE /* AddCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CF1BB2CE738FC008CA0DE /* AddCard.swift */; };
 		B4FD28B62CE2417800C329FB /* CardGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD28B52CE2417800C329FB /* CardGameApp.swift */; };
 		B4FD28B82CE2417800C329FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD28B72CE2417800C329FB /* ContentView.swift */; };
 		B4FD28BA2CE2417A00C329FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4FD28B92CE2417A00C329FB /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B46CF1BB2CE738FC008CA0DE /* AddCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCard.swift; sourceTree = "<group>"; };
 		B4FD28B22CE2417800C329FB /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4FD28B52CE2417800C329FB /* CardGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameApp.swift; sourceTree = "<group>"; };
 		B4FD28B72CE2417800C329FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				B4FD28B72CE2417800C329FB /* ContentView.swift */,
 				B4FD28C32CE2422F00C329FB /* Card.swift */,
 				B4FD28C52CE243EC00C329FB /* CardView.swift */,
+				B46CF1BB2CE738FC008CA0DE /* AddCard.swift */,
 				B4FD28B92CE2417A00C329FB /* Assets.xcassets */,
 				B4FD28BB2CE2417A00C329FB /* Preview Content */,
 			);
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4FD28B82CE2417800C329FB /* ContentView.swift in Sources */,
+				B46CF1BC2CE738FE008CA0DE /* AddCard.swift in Sources */,
 				B4FD28C42CE2422F00C329FB /* Card.swift in Sources */,
 				B4FD28C62CE243EC00C329FB /* CardView.swift in Sources */,
 				B4FD28B62CE2417800C329FB /* CardGameApp.swift in Sources */,
@@ -294,7 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mantosh.CardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -321,7 +325,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mantosh.CardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

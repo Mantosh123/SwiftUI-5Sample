@@ -16,12 +16,13 @@ extension View {
 
 struct ContentView: View {
     
-    @State private var cards = Array<Card>(repeating: .example, count: 10)
+    @State private var cards = [Card]()
     @State private var  timeRemaning = 100
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @Environment(\.scenePhase) var scenePhase
     @State private var isActive = true
+    @State private var showingEditScreen = false
     
     var body: some View {
         
@@ -44,6 +45,7 @@ struct ContentView: View {
                             }
                         }
                         .stacked(at: index, in: cards.count)
+                        .allowsHitTesting(index == cards.count - 1)
                     }
                 }
                 .allowsHitTesting(timeRemaning > 0)
@@ -55,6 +57,22 @@ struct ContentView: View {
                         .foregroundStyle(.black)
                         .clipShape(.capsule)
                 }
+            }
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        showingEditScreen = true
+                    } label: {
+                        Image(systemName: "plus.circle").tint(.white)
+                            .padding()
+                            .background(.black.opacity(0.7))
+                            .clipShape(.circle)
+                            .padding()
+                    }
+                }
+                Spacer()
             }
             .onReceive(timer) { timer in
                 guard isActive else { return }
@@ -72,6 +90,8 @@ struct ContentView: View {
                     isActive = false
                 }
             }
+            .sheet(isPresented: $showingEditScreen, onDismiss: resetCard, content: AddCard.init)
+            .onAppear(perform: resetCard)
         }
         
     }
@@ -85,9 +105,17 @@ struct ContentView: View {
     }
     
     func resetCard() {
-        cards = Array<Card>(repeating: .example, count: 10)
         timeRemaning = 100
         isActive = true
+        loadData()
+    }
+    
+    func loadData() {
+        if let data = UserDefaults.standard.data(forKey: "Cards") {
+            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
+                cards = decoded
+            }
+        }
     }
     
 }
